@@ -14,7 +14,7 @@ namespace Okazuki.MVVM.Messages
 {
     public class NavigationMessage : GenericMessage<Uri>
     {
-        public NavigationMessage(string uri): this(new Uri(uri))
+        public NavigationMessage(string uri): this(new Uri(uri, UriKind.Relative))
         {
         }
 

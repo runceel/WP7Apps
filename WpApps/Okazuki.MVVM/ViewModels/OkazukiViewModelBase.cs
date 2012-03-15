@@ -20,5 +20,7 @@ namespace Okazuki.MVVM.ViewModels
         {
             this.MessageToken = Guid.NewGuid();
         }
+
+        public Messenger Messenger { get { return this.MessengerInstance as Messenger; } }
     }
 }

@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.MVVM", "Okazuki.MVV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.MVVM.Test", "Okazuki.MVVM.Test\Okazuki.MVVM.Test.csproj", "{C413AF80-9E70-4D17-902D-BA614D248894}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TenSecGame", "TenSecGame", "{5FBC07EF-A0FD-4DB5-A699-247A1415065F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TenSecGame", "TenSecGame\Okazuki.TenSecGame\Okazuki.TenSecGame.csproj", "{18738B09-916E-4F2D-A11D-361EB9456796}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,17 @@ Global
 		{C413AF80-9E70-4D17-902D-BA614D248894}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C413AF80-9E70-4D17-902D-BA614D248894}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C413AF80-9E70-4D17-902D-BA614D248894}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{18738B09-916E-4F2D-A11D-361EB9456796}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18738B09-916E-4F2D-A11D-361EB9456796}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18738B09-916E-4F2D-A11D-361EB9456796}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{18738B09-916E-4F2D-A11D-361EB9456796}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18738B09-916E-4F2D-A11D-361EB9456796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18738B09-916E-4F2D-A11D-361EB9456796}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{18738B09-916E-4F2D-A11D-361EB9456796} = {5FBC07EF-A0FD-4DB5-A699-247A1415065F}
 	EndGlobalSection
 EndGlobal
