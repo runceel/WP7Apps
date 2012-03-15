@@ -1,19 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Reactive.Disposables;
-using System.Reflection;
-using System.Reactive.Linq;
-
-namespace Okazuki.MVVM.Events
+﻿namespace Okazuki.MVVM.Events
 {
+    using System;
+    using System.Reactive.Disposables;
+
     public static class WeakEvent
     {
         #region EventHandler<T>
@@ -61,58 +50,5 @@ namespace Okazuki.MVVM.Events
             }
         }
         #endregion
-
-        #region 任意のデリゲート
-        public static IDisposable Handle<TEventHandler, TEventArgs>(
-            Func<Action<TEventArgs>, TEventHandler> converter,
-            Action<TEventHandler> addHandler,
-            Action<TEventHandler> removeHandler,
-            Action<TEventArgs> handler)
-            where TEventArgs : EventArgs
-        {
-            var h = converter(handler);
-            var l = new WeakEventHandlerListener<TEventHandler, TEventArgs>(
-                h,
-                addHandler,
-                removeHandler,
-                handler);
-
-            return Disposable.Create(() => removeHandler(h));
-        }
-
-        private class WeakEventHandlerListener<TEventHandler, TEventArgs>
-            where TEventArgs : EventArgs
-        {
-            private WeakReference weakHandler;
-            private Action<TEventHandler> removeHandler;
-            private TEventHandler invokeHandler;
-            private Action<TEventArgs> action;
-
-            public WeakEventHandlerListener(
-                TEventHandler h,
-                Action<TEventHandler> addHandler,
-                Action<TEventHandler> removeHandler,
-                Action<TEventArgs> handler)
-            {
-                this.weakHandler = new WeakReference(h);
-                this.action = handler;
-            }
-
-            public void Invoke(TEventArgs e)
-            {
-                if (!this.weakHandler.IsAlive)
-                {
-                    this.removeHandler(invokeHandler);
-                    return;
-                }
-
-                var h = this.weakHandler.Target as Action<TEventArgs>;
-                h(e);
-            }
-        }
-
-
-        #endregion
-
     }
 }

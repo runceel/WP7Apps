@@ -41,9 +41,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.Prism">
-      <HintPath>..\packages\Prism.WindowsPhone7.4.1.0\lib\sl4-windowsphone71\Microsoft.Practices.Prism.dll</HintPath>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WP71">
+      <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\GalaSoft.MvvmLight.Extras.WP71.dll</HintPath>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WP71">
+      <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\GalaSoft.MvvmLight.WP71.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="System.Observable" />
     <Reference Include="System.Reactive">
       <HintPath>..\packages\Rx-Main.1.0.11226\lib\SL3-WP\System.Reactive.dll</HintPath>
@@ -54,17 +60,26 @@
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=3.8.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLight.3.1.1\lib\sl4-windowsphone71\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\MessageBehaviorBase.cs" />
+    <Compile Include="Behaviors\NavigationMessageBehavior.cs" />
+    <Compile Include="Messages\NavigationMessage.cs" />
     <Compile Include="Events\WeakEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MessengerExtensions.cs" />
+    <Compile Include="ViewModels\OkazukiViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions />
