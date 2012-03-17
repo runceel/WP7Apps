@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Okazuki.MVVM.Commons;
 
 namespace Okazuki.TenSecGame.Models
 {
@@ -24,5 +25,7 @@ namespace Okazuki.TenSecGame.Models
         {
             Context = this;
         }
+
+
     }
 }

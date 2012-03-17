@@ -1,20 +1,13 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.ComponentModel;
-
-namespace Okazuki.TenSecGame.Models
+﻿namespace Okazuki.MVVM.Commons
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
+
     public class NotificationObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected virtual void RaisePropertyChanged(string propertyName)
         {
             var h = this.PropertyChanged;
@@ -22,6 +15,19 @@ namespace Okazuki.TenSecGame.Models
             {
                 h(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        protected void RaisePropertyChanged<T>(Expression<Func<T>> propertySelector)
+        {
+            this.RaisePropertyChanged(ExpressionHelper.GetPropertyName(propertySelector));
+        }
+
+        protected virtual bool SetProperty<T>(Expression<Func<T>> propertySelector, ref T field, T value)
+        {
+            return this.SetProperty(
+                ExpressionHelper.GetPropertyName(propertySelector),
+                ref field,
+                value);
         }
 
         protected virtual bool SetProperty<T>(string propertyName, ref T field, T value)
