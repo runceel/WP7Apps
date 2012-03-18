@@ -5,21 +5,37 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:Okazuki_MVVM_Behaviors="clr-namespace:Okazuki.MVVM.Behaviors;assembly=Okazuki.MVVM"
-	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+	xmlns:vm="clr-namespace:Okazuki.TenSecGame.ViewModels"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:Okazuki_MVVM_Behaviors="clr-namespace:Okazuki.MVVM.Behaviors;assembly=Okazuki.MVVM"
+	xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	x:Class="Okazuki_TenSecGame.GamePage"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
 	Orientation="Portrait"
 	shell:SystemTray.IsVisible="True">
-
+    <phone:PhoneApplicationPage.DataContext>
+        <vm:GamePageViewModel />
+    </phone:PhoneApplicationPage.DataContext>
 	<i:Interaction.Behaviors>
 		<Okazuki_MVVM_Behaviors:NavigationMessageBehavior/>
 	</i:Interaction.Behaviors>
 
 	<!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
 	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="VisualStateGroup">
+				<VisualState x:Name="Stoped"/>
+				<VisualState x:Name="Started">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentControl.Content)" Storyboard.TargetName="button">
+							<DiscreteObjectKeyFrame KeyTime="0" Value="10秒たったと思ったら押して"/>
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
@@ -27,13 +43,17 @@
 		
 		<!--TitlePanel には、アプリケーションの名前とページ タイトルが含まれています。-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="10sec game" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="ApplicationTitle" Text="{Binding Source={StaticResource gameTitle}}" Style="{StaticResource PhoneTextNormalStyle}"/>
 			<TextBlock x:Name="PageTitle" Text="体感で10秒" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
 		<!--ContentPanel - 追加のコンテンツを配置します-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<Button Content="Start" Margin="8,8,8,264"/>
+			<Button x:Name="button" Content="カウントダウン開始" Margin="8,8,8,264" Command="{Binding CountDownStartCommand}" >
+				<i:Interaction.Behaviors>
+					<ec:DataStateBehavior Binding="{Binding IsStarted, Mode=OneWay}" Value="True" TrueState="Started" FalseState="Stoped"/>
+				</i:Interaction.Behaviors>
+			</Button>
 		</Grid>
 	</Grid>
 </phone:PhoneApplicationPage>

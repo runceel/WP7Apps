@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Okazuki.TenSecGame.Models;
 
 namespace Okazuki.TenSecGame
 {
@@ -63,24 +64,31 @@ namespace Okazuki.TenSecGame
         // このコードは、アプリケーションが再アクティブ化済みの場合には実行されません
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            TenSecGameApplication.Context.Load();
         }
 
         // アプリケーションがアクティブになった (前面に表示された) ときに実行されるコード
         // このコードは、アプリケーションの初回起動時には実行されません
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            if (e.IsApplicationInstancePreserved)
+            {
+                TenSecGameApplication.Context.Load();
+            }
         }
 
         // アプリケーションが非アクティブになった (バックグラウンドに送信された) ときに実行されるコード
         // このコードは、アプリケーションの終了時には実行されません
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            TenSecGameApplication.Context.Save();
         }
 
         // (たとえば、ユーザーが戻るボタンを押して) アプリケーションが終了するときに実行されるコード
         // このコードは、アプリケーションが非アクティブになっているときには実行されません
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            TenSecGameApplication.Context.Save();
         }
 
         // ナビゲーションに失敗した場合に実行されるコード

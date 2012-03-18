@@ -71,6 +71,7 @@
     <Compile Include="Behaviors\ApplicationBarCommandBehavior.cs" />
     <Compile Include="Behaviors\MessageBehaviorBase.cs" />
     <Compile Include="Behaviors\NavigationMessageBehavior.cs" />
+    <Compile Include="Commons\EnumerableExtensions.cs" />
     <Compile Include="Commons\ExpressionHelper.cs" />
     <Compile Include="Commons\NotificationObject.cs" />
     <Compile Include="Commons\NotifyCollectionChangedExtensions.cs" />

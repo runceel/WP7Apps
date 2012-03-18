@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Reactive.Concurrency;
-using System.Runtime.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Okazuki.TenSecGame.Models;
-
-namespace Okazuki.TenSecGame.Test.Models
+﻿namespace Okazuki.TenSecGame.Test.Models
 {
+    using System;
+    using System.IO;
+    using System.Reactive.Concurrency;
+    using System.Runtime.Serialization;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Okazuki.TenSecGame.Models;
+
     [TestClass]
     public class TecSecGameTest
     {
@@ -19,7 +19,7 @@ namespace Okazuki.TenSecGame.Test.Models
         {
             this.scheduler = new HistoricalScheduler();
             scheduler.AdvanceTo(GameStartDateTimeOffset);
-            this.game = new TenSecGame.Models.TenSecGame(scheduler);
+            this.game = new Okazuki.TenSecGame.Models.TenSecGame(scheduler);
         }
 
         [TestCleanup]
@@ -39,7 +39,7 @@ namespace Okazuki.TenSecGame.Test.Models
             scheduler.AdvanceBy(TimeSpan.FromSeconds(10));
             game.Stop();
 
-            log.TenSecSpan.Is(TimeSpan.Zero);
+            log.Is(l => l.GameDateTime == GameStartDateTimeOffset && l.TenSecSpan == TimeSpan.Zero);
         }
 
         [TestMethod]
