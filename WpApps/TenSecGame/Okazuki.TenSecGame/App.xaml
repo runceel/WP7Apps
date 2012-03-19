@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application 
-    x:Class="Okazuki.TenSecGame.App" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone" 
@@ -8,13 +7,48 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    x:Class="Okazuki.TenSecGame.App"
     mc:Ignorable="d">
     <!--アプリケーション リソース-->
     <Application.Resources>
-        <sys:String x:Key="gameTitle">10かうんだうん</sys:String>
+    	<sys:String x:Key="gameTitle">10かうんだうん</sys:String>
+    	<DataTemplate x:Key="GameLogTemplate">
+    		<Grid d:DesignWidth="160" d:DesignHeight="24" HorizontalAlignment="Stretch">
+    			<Grid.ColumnDefinitions>
+    				<ColumnDefinition Width="*"/>
+    				<ColumnDefinition Width="Auto"/>
+    			</Grid.ColumnDefinitions>
+    			<Grid.RowDefinitions>
+    				<RowDefinition />
+    				<RowDefinition />
+    			</Grid.RowDefinitions>
+    			<VisualStateManager.CustomVisualStateManager>
+    				<ec:ExtendedVisualStateManager/>
+    			</VisualStateManager.CustomVisualStateManager>
+    			<VisualStateManager.VisualStateGroups>
+    				<VisualStateGroup x:Name="VisualStateGroup">
+    					<VisualState x:Name="Normal"/>
+    					<VisualState x:Name="Perfect">
+    						<Storyboard>
+    							<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Text)" Storyboard.TargetName="textBlock">
+    								<DiscreteObjectKeyFrame KeyTime="0" Value="どんぴしゃ！！"/>
+    							</ObjectAnimationUsingKeyFrames>
+    						</Storyboard>
+    					</VisualState>
+    				</VisualStateGroup>
+    			</VisualStateManager.VisualStateGroups>
+    			<i:Interaction.Behaviors>
+    				<ec:DataStateBehavior Binding="{Binding Model.IsPerfect, Mode=OneWay}" Value="True" TrueState="Perfect" FalseState="Normal"/>
+    			</i:Interaction.Behaviors>
+    			<TextBlock Text="{Binding Model.GameDateTime, StringFormat=ゲーム開始日時: yyyy/MM/dd HH:mm:ss}" d:LayoutOverrides="Height" HorizontalAlignment="Left" Margin="2.5"/>
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Right" TextWrapping="NoWrap" d:LayoutOverrides="Width, Height" Grid.Row="1" Margin="2.5" Text="{Binding FormatedTenSecSpan}"/>
+    			<Button Content="削除" Grid.RowSpan="2" Grid.Column="1" Margin="2.5" Command="{Binding DeleteCommand, Mode=OneWay}"/>
+    		</Grid>
+    	</DataTemplate>
     </Application.Resources>
     <Application.ApplicationLifetimeObjects>
         <!--アプリケーションのライフタイム イベントを処理する必須オブジェクト-->
-        <shell:PhoneApplicationService Launching="Application_Launching" Closing="Application_Closing" Activated="Application_Activated" Deactivated="Application_Deactivated" />
+    	<shell:PhoneApplicationService Launching="Application_Launching" Closing="Application_Closing" Activated="Application_Activated" Deactivated="Application_Deactivated" />
     </Application.ApplicationLifetimeObjects>
 </Application>

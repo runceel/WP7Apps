@@ -39,7 +39,7 @@
             scheduler.AdvanceBy(TimeSpan.FromSeconds(10));
             game.Stop();
 
-            log.Is(l => l.GameDateTime == GameStartDateTimeOffset && l.TenSecSpan == TimeSpan.Zero);
+            log.Is(l => l.GameDateTime == GameStartDateTimeOffset && l.TenSecSpan == TimeSpan.Zero && l.IsPerfect);
         }
 
         [TestMethod]
@@ -55,13 +55,15 @@
 
             game.GameLogs.Count.Is(2);
 
-            game.GameLogs[0].Is(i => 
+            game.GameLogs[0].Is(i =>
+                i.TenSecSpan == TimeSpan.FromSeconds(-1.1) &&
+                i.GameDateTime == GameStartDateTimeOffset.Add(TimeSpan.FromSeconds(9.9)).DateTime,
+                "後にしたゲームの情報が先頭に追加される");
+
+            game.GameLogs[1].Is(i => 
                 i.TenSecSpan == TimeSpan.FromSeconds(0.1) &&
                 i.GameDateTime == GameStartDateTimeOffset.DateTime);
 
-            game.GameLogs[1].Is(i =>
-                i.TenSecSpan == TimeSpan.FromSeconds(-1.1) &&
-                i.GameDateTime == GameStartDateTimeOffset.Add(TimeSpan.FromSeconds(9.9)).DateTime);
         }
 
         [TestMethod]
@@ -83,10 +85,10 @@
             var deserializedGame = serializer.ReadObject(ms) as Okazuki.TenSecGame.Models.TenSecGame;
             deserializedGame.Is(i =>
                 i.GameLogs.Count == 2 &&
-                i.GameLogs[0].GameDateTime == GameStartDateTimeOffset.DateTime &&
-                i.GameLogs[0].TenSecSpan == TimeSpan.FromSeconds(1) &&
-                i.GameLogs[1].GameDateTime == GameStartDateTimeOffset.Add(TimeSpan.FromSeconds(9)) &&
-                i.GameLogs[1].TenSecSpan == TimeSpan.Zero);
+                i.GameLogs[0].GameDateTime == GameStartDateTimeOffset.Add(TimeSpan.FromSeconds(9)) &&
+                i.GameLogs[0].TenSecSpan == TimeSpan.Zero &&
+                i.GameLogs[1].GameDateTime == GameStartDateTimeOffset.DateTime &&
+                i.GameLogs[1].TenSecSpan == TimeSpan.FromSeconds(1));
         }
     }
 }

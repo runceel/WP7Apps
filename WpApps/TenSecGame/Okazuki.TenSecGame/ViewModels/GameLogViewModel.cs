@@ -1,20 +1,14 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Okazuki.MVVM.ViewModels;
-using Okazuki.TenSecGame.Models;
-
-namespace Okazuki.TenSecGame.ViewModels
+﻿namespace Okazuki.TenSecGame.ViewModels
 {
+    using System;
+    using Okazuki.MVVM.ViewModels;
+    using Okazuki.TenSecGame.Models;
+    using GalaSoft.MvvmLight.Command;
+
     public class GameLogViewModel : OkazukiViewModelBase
     {
+        public RelayCommand DeleteCommand { get; private set; }
+
         private GameLog _Model;
         public GameLog Model
         {
@@ -31,6 +25,21 @@ namespace Okazuki.TenSecGame.ViewModels
         public GameLogViewModel(GameLog model, Guid messageToken)
             : base(messageToken)
         {
+            this.Model = model;
+
+            this.DeleteCommand = new RelayCommand(() =>
+            {
+                TenSecGameApplication.Context.Game.GameLogs.Remove(this.Model);
+            });
         }
+
+        public string FormatedTenSecSpan
+        {
+            get
+            {
+                return string.Format("誤差 {0}.{1}秒", this.Model.TenSecSpan.Seconds, this.Model.TenSecSpan.Milliseconds);
+            }
+        }
+
     }
 }

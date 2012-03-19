@@ -11,6 +11,7 @@ using System.Windows.Shapes;
 using Okazuki.MVVM.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using Okazuki.TenSecGame.Models;
+using Okazuki.MVVM.Messages;
 
 namespace Okazuki.TenSecGame.ViewModels
 {
@@ -28,20 +29,27 @@ namespace Okazuki.TenSecGame.ViewModels
             }
         }
 
-        public GamePageViewModel()
+        public GamePageViewModel() : this(TenSecGameApplication.Context)
+        {
+        }
+
+        public GamePageViewModel(TenSecGameApplication model)
         {
             if (this.IsInDesignMode)
             {
                 return;
             }
 
-            model = TenSecGameApplication.Context;
+            this.model = model;
 
             this.CountDownStartCommand = new RelayCommand(() =>
             {
                 if (this.IsStarted)
                 {
                     model.Game.Stop();
+                    this.Messenger.SendWithViewModelToken(
+                        this,
+                        new NavigationMessage(NavigationBehavior.Back));
                 }
                 else
                 {

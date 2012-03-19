@@ -14,6 +14,8 @@ namespace Okazuki.MVVM.Messages
 {
     public class NavigationMessage : GenericMessage<Uri>
     {
+        public NavigationBehavior NavigationBehavior { get; private set; }
+
         public NavigationMessage(string uri): this(new Uri(uri, UriKind.Relative))
         {
         }
@@ -21,5 +23,17 @@ namespace Okazuki.MVVM.Messages
         public NavigationMessage(Uri uri) : base(uri)
         {
         }
+
+        public NavigationMessage(NavigationBehavior behavior) : base(new Uri("/"))
+        {
+            this.NavigationBehavior = behavior;
+        }
+    }
+
+    public enum NavigationBehavior
+    {
+        None,
+        Back,
+        Forward
     }
 }

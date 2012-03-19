@@ -6,6 +6,7 @@
     using System.Reactive.Concurrency;
     using System.Reactive.Linq;
     using Okazuki.MVVM.Commons;
+    using System.Threading;
 
     public class TenSecGame : NotificationObject
     {
@@ -57,7 +58,7 @@
 
         public void Start()
         {
-            this.CurrentGameLog = new GameLog { GameDateTime = this.scheduler.Now.DateTime };
+            this.CurrentGameLog = new GameLog { GameDateTime = this.GetNowDateTime() };
         }
 
         public void Stop()
@@ -67,9 +68,16 @@
                 throw new InvalidOperationException("game does not started");
             }
 
-            this.CurrentGameLog.GameEnd(scheduler.Now.DateTime);
-            this.GameLogs.Add(this.CurrentGameLog);
+            this.CurrentGameLog.GameEnd(this.GetNowDateTime());
+            this.GameLogs.Insert(0, this.CurrentGameLog);
             this.CurrentGameLog = null;
+        }
+
+        private DateTime GetNowDateTime()
+        {
+            var format = "yyyy/MM/dd HH:mm:ss.FF";
+            var tmp = this.scheduler.Now.ToString(format);
+            return DateTime.ParseExact(tmp, format, Thread.CurrentThread.CurrentCulture);
         }
     }
 }

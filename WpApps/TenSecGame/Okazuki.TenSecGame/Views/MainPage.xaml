@@ -20,13 +20,15 @@
     </phone:PhoneApplicationPage.DataContext>
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
-			<shell:ApplicationBarIconButton IconUri="/icons/appbar.check.rest.png" Text="start"/>
+			<shell:ApplicationBarIconButton IconUri="/icons/appbar.check.rest.png" Text="開始"/>
+			<shell:ApplicationBarIconButton IconUri="/icons/appbar.delete.rest.png" Text="履歴クリア"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
  
 	<i:Interaction.Behaviors>
 		<Okazuki_MVVM_Behaviors:NavigationMessageBehavior MessageToken="{Binding MessageToken}"/>
-        <Okazuki_MVVM_Behaviors:ApplicationBarButtonCommand ButtonText="start" CommandBinding="{Binding StartCommand}" />
+        <Okazuki_MVVM_Behaviors:ApplicationBarButtonCommand ButtonText="開始" CommandBinding="{Binding StartCommand, Mode=OneWay}" />
+        <Okazuki_MVVM_Behaviors:ApplicationBarButtonCommand ButtonText="履歴クリア" CommandBinding="{Binding ClearLogCommand, Mode=OneWay}"/>
 	</i:Interaction.Behaviors>
 
     <!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
@@ -55,12 +57,12 @@
         <!--TitlePanel は、アプリケーション名とページ タイトルを格納します-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="{Binding Source={StaticResource gameTitle}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="ゲーム履歴" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="結果" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - 追加コンテンツをここに入力します-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<ListBox ItemsSource="{Binding GameLogs}" />
+        	<ListBox ItemsSource="{Binding GameLogs}" ItemTemplate="{StaticResource GameLogTemplate}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
         	<Border x:Name="border" BorderBrush="Black" BorderThickness="1">
         		<i:Interaction.Behaviors>
         			<ec:DataStateBehavior Binding="{Binding HasGameLog}" Value="True" TrueState="HasLog" FalseState="Normal"/>

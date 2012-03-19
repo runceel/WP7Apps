@@ -24,6 +24,7 @@ namespace Okazuki.TenSecGame.ViewModels
         private CompositeDisposable disposable = new CompositeDisposable();
 
         public RelayCommand StartCommand { get; private set; }
+        public RelayCommand ClearLogCommand { get; private set; }
 
         private ObservableCollection<GameLogViewModel> _GameLogs;
         public ObservableCollection<GameLogViewModel> GameLogs
@@ -58,14 +59,6 @@ namespace Okazuki.TenSecGame.ViewModels
             {
                 return;
             }
-
-            // コマンドの初期化
-            this.StartCommand = new RelayCommand(() =>
-            {
-                this.Messenger.SendWithViewModelToken(
-                    this,
-                    new NavigationMessage("/Views/GamePage.xaml"));
-            });
 
             var model = TenSecGameApplication.Context;
 
@@ -107,6 +100,19 @@ namespace Okazuki.TenSecGame.ViewModels
             var changedSubscriber = model.Game.GameLogs.CollectionChangedAsObservable()
                 .Subscribe(_ => this.HasGameLog = model.Game.GameLogs.Count != 0);
             disposable.Add(changedSubscriber);
+
+
+            // コマンドの初期化
+            this.StartCommand = new RelayCommand(() =>
+            {
+                this.Messenger.SendWithViewModelToken(
+                    this,
+                    new NavigationMessage("/Views/GamePage.xaml"));
+            });
+            this.ClearLogCommand = new RelayCommand(() =>
+            {
+                model.Game.GameLogs.Clear();
+            });
         }
 
         public override void Cleanup()

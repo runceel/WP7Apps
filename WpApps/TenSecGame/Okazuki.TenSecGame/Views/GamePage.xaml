@@ -19,7 +19,7 @@
         <vm:GamePageViewModel />
     </phone:PhoneApplicationPage.DataContext>
 	<i:Interaction.Behaviors>
-		<Okazuki_MVVM_Behaviors:NavigationMessageBehavior/>
+		<Okazuki_MVVM_Behaviors:NavigationMessageBehavior MessageToken="{Binding MessageToken, Mode=OneWay}"/>
 	</i:Interaction.Behaviors>
 
 	<!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
@@ -30,7 +30,7 @@
 				<VisualState x:Name="Started">
 					<Storyboard>
 						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(ContentControl.Content)" Storyboard.TargetName="button">
-							<DiscreteObjectKeyFrame KeyTime="0" Value="10秒たったと思ったら押して"/>
+							<DiscreteObjectKeyFrame KeyTime="0" Value="10秒数えてタップ"/>
 						</ObjectAnimationUsingKeyFrames>
 					</Storyboard>
 				</VisualState>
@@ -49,7 +49,7 @@
 
 		<!--ContentPanel - 追加のコンテンツを配置します-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<Button x:Name="button" Content="カウントダウン開始" Margin="8,8,8,264" Command="{Binding CountDownStartCommand}" >
+			<Button x:Name="button" Content="タップでゲーム開始" Command="{Binding CountDownStartCommand}" BorderThickness="0">
 				<i:Interaction.Behaviors>
 					<ec:DataStateBehavior Binding="{Binding IsStarted, Mode=OneWay}" Value="True" TrueState="Started" FalseState="Stoped"/>
 				</i:Interaction.Behaviors>

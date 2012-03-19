@@ -34,6 +34,15 @@
             set
             {
                 this.SetProperty<TimeSpan>(() => TenSecSpan, ref _TenSecSpan, value);
+                this.RaisePropertyChanged(() => IsPerfect);
+            }
+        }
+
+        public bool IsPerfect 
+        {
+            get
+            {
+                return this.TenSecSpan == TimeSpan.Zero;
             }
         }
 
