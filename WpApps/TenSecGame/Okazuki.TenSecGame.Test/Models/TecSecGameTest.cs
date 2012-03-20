@@ -60,10 +60,36 @@
                 i.GameDateTime == GameStartDateTimeOffset.Add(TimeSpan.FromSeconds(9.9)).DateTime,
                 "後にしたゲームの情報が先頭に追加される");
 
-            game.GameLogs[1].Is(i => 
+            game.GameLogs[1].Is(i =>
                 i.TenSecSpan == TimeSpan.FromSeconds(0.1) &&
                 i.GameDateTime == GameStartDateTimeOffset.DateTime);
 
+        }
+
+        [TestMethod]
+        public void MaxThreeLogGame()
+        {
+            game.Start();
+            scheduler.AdvanceBy(TimeSpan.FromSeconds(9.9));
+            game.Stop();
+
+            game.Start();
+            scheduler.AdvanceBy(TimeSpan.FromSeconds(11.1));
+            game.Stop();
+
+            game.Start();
+            scheduler.AdvanceBy(TimeSpan.FromSeconds(11.1));
+            game.Stop();
+            
+            game.Start();
+            scheduler.AdvanceBy(TimeSpan.FromSeconds(11.1));
+            game.Stop();
+            
+            game.Start();
+            scheduler.AdvanceBy(TimeSpan.FromSeconds(11.1));
+            game.Stop();
+
+            game.GameLogs.Count.Is(3, "ゲームの最大保存回数は3");
         }
 
         [TestMethod]

@@ -70,6 +70,12 @@
 
             this.CurrentGameLog.GameEnd(this.GetNowDateTime());
             this.GameLogs.Insert(0, this.CurrentGameLog);
+
+            while (this.GameLogs.Count > 3)
+            {
+                this.GameLogs.Remove(this.GameLogs.Last());
+            }
+
             this.CurrentGameLog = null;
         }
 

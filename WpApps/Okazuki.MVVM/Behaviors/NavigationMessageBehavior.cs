@@ -1,8 +1,8 @@
 ﻿namespace Okazuki.MVVM.Behaviors
 {
+    using System;
     using Microsoft.Phone.Controls;
     using Okazuki.MVVM.Messages;
-    using System;
 
     public class NavigationMessageBehavior : MessageBehaviorBase<PhoneApplicationPage, NavigationMessage>
     {

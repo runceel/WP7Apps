@@ -71,7 +71,7 @@ namespace Okazuki.TenSecGame
         // このコードは、アプリケーションの初回起動時には実行されません
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            if (e.IsApplicationInstancePreserved)
+            if (!e.IsApplicationInstancePreserved)
             {
                 TenSecGameApplication.Context.Load();
             }

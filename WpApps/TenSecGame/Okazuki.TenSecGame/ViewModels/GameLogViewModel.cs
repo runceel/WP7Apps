@@ -7,8 +7,6 @@
 
     public class GameLogViewModel : OkazukiViewModelBase
     {
-        public RelayCommand DeleteCommand { get; private set; }
-
         private GameLog _Model;
         public GameLog Model
         {
@@ -26,18 +24,20 @@
             : base(messageToken)
         {
             this.Model = model;
-
-            this.DeleteCommand = new RelayCommand(() =>
-            {
-                TenSecGameApplication.Context.Game.GameLogs.Remove(this.Model);
-            });
         }
 
         public string FormatedTenSecSpan
         {
             get
             {
-                return string.Format("誤差 {0}.{1}秒", this.Model.TenSecSpan.Seconds, this.Model.TenSecSpan.Milliseconds);
+                if (this.Model.IsPerfect)
+                {
+                    return "完璧！！";
+                }
+
+                return string.Format(
+                    this.Model.TenSecSpan.TotalMilliseconds < 0 ? "誤差 -{0:ss.ff}秒" : "誤差 {0:ss.ff}秒",
+                    new DateTime(0).Add(TimeSpan.FromMilliseconds(Math.Abs(this.Model.TenSecSpan.TotalMilliseconds))));
             }
         }
 

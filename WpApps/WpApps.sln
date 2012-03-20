@@ -11,6 +11,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TenSecGame", "TenSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TenSecGame.Test", "TenSecGame\Okazuki.TenSecGame.Test\Okazuki.TenSecGame.Test.csproj", "{911FDABB-5F5E-4940-AA1E-395C8583B1A5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TenSecGameIconset", "TenSecGameIconset", "{0D50D9E5-C0B8-4FC7-AE29-B63EA07FB7BB}"
+	ProjectSection(SolutionItems) = preProject
+		TenSecGame\TenSecGameIconset\172.png = TenSecGame\TenSecGameIconset\172.png
+		TenSecGame\TenSecGameIconset\172bg.png = TenSecGame\TenSecGameIconset\172bg.png
+		TenSecGame\TenSecGameIconset\200.png = TenSecGame\TenSecGameIconset\200.png
+		TenSecGame\TenSecGameIconset\200bg.png = TenSecGame\TenSecGameIconset\200bg.png
+		TenSecGame\TenSecGameIconset\99x99.png = TenSecGame\TenSecGameIconset\99x99.png
+		TenSecGame\TenSecGameIconset\ApplicationIcon.png = TenSecGame\TenSecGameIconset\ApplicationIcon.png
+		TenSecGame\TenSecGameIconset\ApplicationIcon_.png = TenSecGame\TenSecGameIconset\ApplicationIcon_.png
+		TenSecGame\TenSecGameIconset\Background.png.png = TenSecGame\TenSecGameIconset\Background.png.png
+		TenSecGame\TenSecGameIconset\cap1.png = TenSecGame\TenSecGameIconset\cap1.png
+		TenSecGame\TenSecGameIconset\cap2.png = TenSecGame\TenSecGameIconset\cap2.png
+		TenSecGame\TenSecGameIconset\cap3.png = TenSecGame\TenSecGameIconset\cap3.png
+		TenSecGame\TenSecGameIconset\cap4.png = TenSecGame\TenSecGameIconset\cap4.png
+		TenSecGame\TenSecGameIconset\cap5.png = TenSecGame\TenSecGameIconset\cap5.png
+		TenSecGame\TenSecGameIconset\SplashScreenImage.jpg = TenSecGame\TenSecGameIconset\SplashScreenImage.jpg
+		TenSecGame\TenSecGameIconset\splsh_schreen_w.jpg = TenSecGame\TenSecGameIconset\splsh_schreen_w.jpg
+		TenSecGame\TenSecGameIconset\１０かうんたん173_173.png = TenSecGame\TenSecGameIconset\１０かうんたん173_173.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,5 +66,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{18738B09-916E-4F2D-A11D-361EB9456796} = {5FBC07EF-A0FD-4DB5-A699-247A1415065F}
 		{911FDABB-5F5E-4940-AA1E-395C8583B1A5} = {5FBC07EF-A0FD-4DB5-A699-247A1415065F}
+		{0D50D9E5-C0B8-4FC7-AE29-B63EA07FB7BB} = {5FBC07EF-A0FD-4DB5-A699-247A1415065F}
 	EndGlobalSection
 EndGlobal

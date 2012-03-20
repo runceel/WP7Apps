@@ -13,16 +13,11 @@ using Microsoft.Phone.Controls;
 
 namespace Okazuki.TenSecGame.Views
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class AboutPage : PhoneApplicationPage
     {
-        public MainPage()
+        public AboutPage()
         {
             InitializeComponent();
-        }
-
-        private void AboutClick(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("/Views/AboutPage.xaml", UriKind.Relative));
         }
     }
 }

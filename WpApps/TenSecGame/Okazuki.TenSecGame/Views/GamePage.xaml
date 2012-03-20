@@ -14,7 +14,8 @@
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
 	Orientation="Portrait"
-	shell:SystemTray.IsVisible="True">
+	shell:SystemTray.IsVisible="True"
+    Language="ja-JP">
     <phone:PhoneApplicationPage.DataContext>
         <vm:GamePageViewModel />
     </phone:PhoneApplicationPage.DataContext>
@@ -49,7 +50,7 @@
 
 		<!--ContentPanel - 追加のコンテンツを配置します-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<Button x:Name="button" Content="タップでゲーム開始" Command="{Binding CountDownStartCommand}" BorderThickness="0">
+			<Button x:Name="button" Content="タップでゲーム開始" Command="{Binding CountDownStartCommand}" BorderThickness="0" Background="{StaticResource PhoneAccentBrush}">
 				<i:Interaction.Behaviors>
 					<ec:DataStateBehavior Binding="{Binding IsStarted, Mode=OneWay}" Value="True" TrueState="Started" FalseState="Stoped"/>
 				</i:Interaction.Behaviors>

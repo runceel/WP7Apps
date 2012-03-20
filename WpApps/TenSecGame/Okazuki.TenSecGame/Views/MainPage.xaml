@@ -14,12 +14,16 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Language="ja-JP">
     <phone:PhoneApplicationPage.DataContext>
         <vm:MainPageViewModel />
     </phone:PhoneApplicationPage.DataContext>
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
+			<shell:ApplicationBar.MenuItems>
+				<shell:ApplicationBarMenuItem Text="このアプリについて" Click="AboutClick"/>
+			</shell:ApplicationBar.MenuItems>
 			<shell:ApplicationBarIconButton IconUri="/icons/appbar.check.rest.png" Text="開始"/>
 			<shell:ApplicationBarIconButton IconUri="/icons/appbar.delete.rest.png" Text="履歴クリア"/>
 		</shell:ApplicationBar>
@@ -62,8 +66,27 @@
 
         <!--ContentPanel - 追加コンテンツをここに入力します-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<ListBox ItemsSource="{Binding GameLogs}" ItemTemplate="{StaticResource GameLogTemplate}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-        	<Border x:Name="border" BorderBrush="Black" BorderThickness="1">
+        	<Grid>
+        		<Grid.ColumnDefinitions>
+        			<ColumnDefinition Width="Auto"/>
+        			<ColumnDefinition Width="20"/>
+        			<ColumnDefinition/>
+        		</Grid.ColumnDefinitions>
+        		<Grid.RowDefinitions>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition/>
+        		</Grid.RowDefinitions>
+        		<TextBlock TextWrapping="Wrap" Text="今回" Style="{StaticResource PhoneTextExtraLargeStyle}" Margin="0,0,-2,0" HorizontalAlignment="Right"/>
+        		<TextBlock TextWrapping="Wrap" Text="前回" Style="{StaticResource PhoneTextLargeStyle}" Margin="0" Grid.Row="1" HorizontalAlignment="Right"/>
+        		<TextBlock TextWrapping="Wrap" Text="前々回" Style="{StaticResource PhoneTextLargeStyle}" Margin="0" Grid.Row="2" HorizontalAlignment="Right"/>
+        		<TextBlock Grid.Column="2" TextWrapping="Wrap" Text="{Binding GameLogs[0].FormatedTenSecSpan, Mode=OneWay}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+        		<TextBlock Grid.Column="2" Grid.Row="1" TextWrapping="Wrap" Text="{Binding GameLogs[1].FormatedTenSecSpan, Mode=OneWay}" Style="{StaticResource PhoneTextLargeStyle}"/>
+        		<TextBlock Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Text="{Binding GameLogs[2].FormatedTenSecSpan, Mode=OneWay}" Style="{StaticResource PhoneTextLargeStyle}"/>
+        		<Image Margin="44,32,36,24" Grid.Row="3" Source="/Okazuki.TenSecGame;component/200bg.png" Stretch="Fill" Grid.ColumnSpan="3"/>
+        	</Grid>
+        	<Border x:Name="border" BorderBrush="Black" Background="{StaticResource PhoneBackgroundBrush}" d:IsHidden="True">
         		<i:Interaction.Behaviors>
         			<ec:DataStateBehavior Binding="{Binding HasGameLog}" Value="True" TrueState="HasLog" FalseState="Normal"/>
         		</i:Interaction.Behaviors>
