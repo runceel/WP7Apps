@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="ChainingAssertion.WP7.cs" />
     <Compile Include="Commons\NotifyCollectionChangedExtensionsTest.cs" />
+    <Compile Include="Commons\ObservableCollectionUtilTest.cs" />
     <Compile Include="Events\WeakEventTest.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

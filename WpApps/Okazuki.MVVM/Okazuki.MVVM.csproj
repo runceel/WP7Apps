@@ -69,17 +69,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Behaviors\ApplicationBarCommandBehavior.cs" />
+    <Compile Include="Behaviors\BrowserMessageBehavior.cs" />
+    <Compile Include="Behaviors\DialogMessageBehavior.cs" />
     <Compile Include="Behaviors\MessageBehaviorBase.cs" />
     <Compile Include="Behaviors\NavigationMessageBehavior.cs" />
+    <Compile Include="Commons\BooleanToVisibilityConverter.cs" />
     <Compile Include="Commons\EnumerableExtensions.cs" />
     <Compile Include="Commons\ExpressionHelper.cs" />
     <Compile Include="Commons\NotificationObject.cs" />
     <Compile Include="Commons\NotifyCollectionChangedExtensions.cs" />
     <Compile Include="Commons\NotifyPropertyChangedExtensions.cs" />
+    <Compile Include="Commons\ObservableCollectionUtil.cs" />
+    <Compile Include="Messages\BrowserMessage.cs" />
     <Compile Include="Messages\NavigationMessage.cs" />
     <Compile Include="Events\WeakEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MessengerExtensions.cs" />
+    <Compile Include="ViewModels\ModelViewModel.cs" />
     <Compile Include="ViewModels\OkazukiViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>

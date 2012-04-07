@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Okazuki.SearchHub.Models;
 
 namespace Okazuki.SearchHub
 {
@@ -63,24 +64,31 @@ namespace Okazuki.SearchHub
         // このコードは、アプリケーションが再アクティブ化済みの場合には実行されません
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            SearchHubApplication.Current.Load();
         }
 
         // アプリケーションがアクティブになった (前面に表示された) ときに実行されるコード
         // このコードは、アプリケーションの初回起動時には実行されません
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            if (!e.IsApplicationInstancePreserved)
+            {
+                SearchHubApplication.Current.Load();
+            }
         }
 
         // アプリケーションが非アクティブになった (バックグラウンドに送信された) ときに実行されるコード
         // このコードは、アプリケーションの終了時には実行されません
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            SearchHubApplication.Current.Save();
         }
 
         // (たとえば、ユーザーが戻るボタンを押して) アプリケーションが終了するときに実行されるコード
         // このコードは、アプリケーションが非アクティブになっているときには実行されません
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            SearchHubApplication.Current.Save();
         }
 
         // ナビゲーションに失敗した場合に実行されるコード
@@ -116,7 +124,7 @@ namespace Okazuki.SearchHub
 
             // フレームを作成しますが、まだ RootVisual に設定しないでください。これによって、アプリケーションがレンダリングできる状態になるまで、
             // スプラッシュ スクリーンをアクティブなままにすることができます。
-            RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // ナビゲーション エラーを処理します

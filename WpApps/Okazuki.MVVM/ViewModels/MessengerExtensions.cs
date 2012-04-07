@@ -34,16 +34,15 @@
             return asyncSubject.AsObservable();
         }
 
-        public static IObservable<TMessage> SendWithViewModelTokenAsObservable<TMessage, TViewModel>(
+        public static IObservable<TResult> SendWithViewModelTokenAsObservable<TMessage, TResult>(
             this Messenger self, 
-            TViewModel viewModel, 
-            Func<Action<TMessage>, TMessage> factory)
-            where TViewModel : OkazukiViewModelBase
+            OkazukiViewModelBase viewModel, 
+            Func<Action<TResult>, TMessage> factory)
         {
-            var asyncSubject = new AsyncSubject<TMessage>();
-            var message = factory(m =>
+            var asyncSubject = new AsyncSubject<TResult>();
+            var message = factory(r =>
             {
-                asyncSubject.OnNext(m);
+                asyncSubject.OnNext(r);
                 asyncSubject.OnCompleted();
             });
 
