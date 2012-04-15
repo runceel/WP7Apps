@@ -54,6 +54,12 @@
     <Reference Include="GalaSoft.MvvmLight.WP71">
       <HintPath>..\..\packages\MvvmLightLibs.3.1.1\lib\sl4-windowsphone71\GalaSoft.MvvmLight.WP71.dll</HintPath>
     </Reference>
+    <Reference Include="Hammock.WindowsPhone.Mango">
+      <HintPath>..\..\packages\TweetSharp.2.1.5\lib\sl4-wp71\Hammock.WindowsPhone.Mango.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib.WindowsPhone">
+      <HintPath>..\..\packages\TweetSharp.2.1.5\lib\sl4-wp71\ICSharpCode.SharpZipLib.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Microsoft.Silverlight.Testing">
@@ -61,6 +67,9 @@
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight">
       <HintPath>..\..\packages\silverlight.unittest.wp7.3.0.40609.1000\lib\sl4-wp71\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\TweetSharp.2.1.5\lib\sl4-wp71\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -71,6 +80,9 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="TweetSharp.WindowsPhone.Mango">
+      <HintPath>..\..\packages\TweetSharp.2.1.5\lib\sl4-wp71\TweetSharp.WindowsPhone.Mango.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -107,7 +119,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SplashScreenImage.jpg" />
-    <Content Include="Test_Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Okazuki.MVVM\Okazuki.MVVM.csproj">

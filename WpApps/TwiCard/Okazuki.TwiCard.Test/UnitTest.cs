@@ -17,7 +17,6 @@ namespace Okazuki.TwiCard.Test
         [TestMethod]
         public void YourTestsHere()
         {
-            Assert.Fail("Write your tests here.");
         }
     }
 }
