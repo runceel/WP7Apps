@@ -13,14 +13,17 @@ using Okazuki.MVVM.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.Reactive.Linq;
+using Okazuki.MVVM.Messages;
+using Microsoft.Phone.Shell;
 
 namespace Okazuki.SearchHub.ViewModels
 {
     public class CategoryListCategoryViewModel : ModelViewModel<CategoryListViewModel, CategoryItem>
     {
-        public RelayCommand OpenBroserCommand { get; private set; }
+        public RelayCommand GoToCategoryCommand { get; private set; }
         public RelayCommand UpCommand { get; private set; }
         public RelayCommand DownCommand { get; private set; }
+        public RelayCommand EditCommand { get; private set; }
         public RelayCommand RemoveCommand { get; private set; }
        
         public CategoryListCategoryViewModel(CategoryListViewModel parent, CategoryItem model)
@@ -33,6 +36,15 @@ namespace Okazuki.SearchHub.ViewModels
 
             var application = SearchHubApplication.Current;
 
+            this.GoToCategoryCommand = new RelayCommand(() =>
+            {
+                var currentIndex = this.Parent.Categories.IndexOf(this);
+                PhoneApplicationService.Current.State[Constraits.CurrentCategoryIndexKey] = currentIndex;
+                this.Messenger.SendWithViewModelToken(
+                    this,
+                    new NavigationMessage(NavigationBehavior.Back));
+            });
+
             this.UpCommand = new RelayCommand(() =>
             {
                 application.Categories.Up(this.Model);
@@ -41,6 +53,14 @@ namespace Okazuki.SearchHub.ViewModels
             this.DownCommand = new RelayCommand(() =>
             {
                 application.Categories.Down(this.Model);
+            });
+
+            this.EditCommand = new RelayCommand(() =>
+            {
+                application.StartEditCategory(this.Model);
+                this.Messenger.SendWithViewModelToken(
+                    this,
+                    new NavigationMessage("/Views/CategoryEditPage.xaml"));
             });
 
             this.RemoveCommand = new RelayCommand(() =>

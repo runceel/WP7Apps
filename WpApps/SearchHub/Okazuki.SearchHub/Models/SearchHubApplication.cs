@@ -1,19 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Linq;
-using Okazuki.MVVM.Commons;
-using System.Collections.ObjectModel;
-using System.IO.IsolatedStorage;
+﻿using System.Collections.ObjectModel;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
+using Okazuki.MVVM.Commons;
 
 namespace Okazuki.SearchHub.Models
 {
@@ -47,16 +36,29 @@ namespace Okazuki.SearchHub.Models
             }
         }
 
-        private CategoryItem _CurrentCategory;
-        public CategoryItem CurrentCategory
+        private EditFavoriteModel _EditFavoriteModel;
+        public EditFavoriteModel EditFavoriteModel
         {
             get
             {
-                return _CurrentCategory;
+                return _EditFavoriteModel;
             }
             set
             {
-                this.SetProperty<CategoryItem>(() => CurrentCategory, ref _CurrentCategory, value);
+                this.SetProperty<EditFavoriteModel>(() => EditFavoriteModel, ref _EditFavoriteModel, value);
+            }
+        }
+
+        private EditCategoryModel _EditCategoryModel;
+        public EditCategoryModel EditCategoryModel
+        {
+            get
+            {
+                return _EditCategoryModel;
+            }
+            set
+            {
+                this.SetProperty<EditCategoryModel>(() => EditCategoryModel, ref _EditCategoryModel, value);
             }
         }
 
@@ -66,46 +68,34 @@ namespace Okazuki.SearchHub.Models
             Current = new SearchHubApplication();
         }
 
-        public SearchHubApplication()
+        public void StartAddFavorite(CategoryItem category)
         {
+            this.StartEditFavorite(category, new FavItem());
         }
 
-        public void AddFavoriteToCurrentCategory(FavItem fav)
+        public void StartEditFavorite(CategoryItem category, FavItem favItem)
         {
-            this.CurrentCategory.Favorites.Add(fav);
+            this.EditFavoriteModel = new EditFavoriteModel
+            {
+                TargetCategory = category,
+                EditTargetFavItem = favItem
+            };
         }
 
-        public void RemoveCategory(string category)
+        public void CommitAddFavorite()
         {
-            var targetCategory = this.Categories.FirstOrDefault(c => c.Name == category);
-            if (targetCategory == null)
+            if (this.EditFavoriteModel == null)
             {
                 return;
             }
 
-            this.Categories.Remove(targetCategory);
+            this.EditFavoriteModel.Commit();
+            this.EditFavoriteModel = null;
         }
 
-        public void UpCategory(string category)
+        public void CancelAddFavorite()
         {
-            var targetCategory = this.Categories.FirstOrDefault(c => c.Name == category);
-            if (targetCategory == null)
-            {
-                return;
-            }
-
-            this.Categories.Up(targetCategory);
-        }
-
-        public void DownCategory(string category)
-        {
-            var targetCategory = this.Categories.FirstOrDefault(c => c.Name == category);
-            if (targetCategory == null)
-            {
-                return;
-            }
-
-            this.Categories.Down(targetCategory);
+            this.EditFavoriteModel = null;
         }
 
         public void Save()
@@ -123,17 +113,19 @@ namespace Okazuki.SearchHub.Models
             var f = IsolatedStorageFile.GetUserStoreForApplication();
             if (!f.FileExists("data.dat"))
             {
+                // initial data
                 this.Categories.Add(new CategoryItem
                 {
-                    Name = "お気に入り",
+                    Name = "良く見る",
                     Favorites = new ObservableCollection<FavItem>
                     {
                         new FavItem { Title = "Google", Url = "http://www.google.co.jp" },
                         new FavItem { Title = "Yahoo", Url = "http://www.yahoo.co.jp/" },
+                        new FavItem { Title = "Bing", Url = "http://www.bing.com/?cc=jp" },
                         new FavItem { Title = "楽天", Url = "http://www.rakuten.co.jp/" },
-                        new FavItem { Title = "かずきのBlog@hatena", Url = "http://d.hatena.ne.jp/okazuki" },
-                        new FavItem { Title = "アプリケーションコード", Url = "https://github.com/runceel/WP7Apps" }
-                    }
+                        new FavItem { Title = "MSNニュース", Url = "http://sankei.jp.msn.com/" },
+                        new FavItem { Title = "Google News", Url = "http://news.google.co.jp/?ned=jp" },
+                   }
                 });
                 this.Categories.Add(new CategoryItem
                 {
@@ -141,16 +133,10 @@ namespace Okazuki.SearchHub.Models
                     Favorites = new ObservableCollection<FavItem>
                     {
                         new FavItem { Title = "Facebook", Url = "http://www.facebook.com/" },
-                        new FavItem { Title = "Twitter", Url = "https://twitter.com/" }
-                    }
-                });
-                this.Categories.Add(new CategoryItem
-                {
-                    Name = "Sample",
-                    Favorites = new ObservableCollection<FavItem>
-                    {
-                        new FavItem { Title = "Facebook", Url = "http://www.facebook.com/" },
-                        new FavItem { Title = "Twitter", Url = "https://twitter.com/" }
+                        new FavItem { Title = "Twitter", Url = "https://twitter.com/" },
+                        new FavItem { Title = "Google+", Url = "http://www.google.com/intl/ja/+/learnmore/" },
+                        new FavItem { Title = "mixi", Url = "http://mixi.jp/" },
+                        new FavItem { Title = "はてぶ", Url = "http://b.hatena.ne.jp/" },
                     }
                 });
                 return;
@@ -165,6 +151,36 @@ namespace Okazuki.SearchHub.Models
                     this.Categories.Add(c);
                 }
             }
+        }
+
+        public void StartAddCategory()
+        {
+            this.StartEditCategory(new CategoryItem());
+        }
+
+        public void StartEditCategory(CategoryItem categoryItem)
+        {
+            this.EditCategoryModel = new EditCategoryModel
+            {
+                EditTargetCategory = categoryItem,
+                Categories = this.Categories
+            };
+        }
+
+        public void CommitEditCategory()
+        {
+            if (this.EditCategoryModel == null)
+            {
+                return;
+            }
+
+            this.EditCategoryModel.Commit();
+            this.EditCategoryModel = null;
+        }
+
+        public void CancelEditCategory()
+        {
+            this.EditCategoryModel = null;
         }
     }
 }

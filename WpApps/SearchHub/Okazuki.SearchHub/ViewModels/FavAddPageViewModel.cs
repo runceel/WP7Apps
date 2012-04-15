@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
+using Okazuki.MVVM.Commons;
 using Okazuki.MVVM.Messages;
 using Okazuki.MVVM.ViewModels;
-using Okazuki.MVVM.Commons;
-using Okazuki.SearchHub.Models;
 
 namespace Okazuki.SearchHub.ViewModels
 {
     public class FavAddPageViewModel : PageViewModelBase
     {
-        public RelayCommand AddCommand { get; set; }
-        public RelayCommand CancelCommand { get; set; }
+        public RelayCommand AddCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
+        public RelayCommand LoadCommand { get; private set; }
 
         private string _Title;
         public string Title
@@ -47,19 +38,43 @@ namespace Okazuki.SearchHub.ViewModels
             }
         }
 
-
         public FavAddPageViewModel()
         {
-            var application = SearchHubApplication.Current;
+            if (this.IsInDesignMode)
+            {
+                return;
+            }
+
+            this.Title = this.Application.EditFavoriteModel.EditTargetFavItem.Title;
+            this.Url = this.Application.EditFavoriteModel.EditTargetFavItem.Url;
 
             this.AddCommand = new RelayCommand(() =>
             {
+                if (this.Application.EditFavoriteModel != null)
+                {
+                    this.Application.EditFavoriteModel.EditTargetFavItem.Title = this.Title;
+                    this.Application.EditFavoriteModel.EditTargetFavItem.Url = this.Url;
+                    this.Application.CommitAddFavorite();
+                }
 
+                this.Messenger.SendWithViewModelToken(
+                    this,
+                    new NavigationMessage(NavigationBehavior.Back));
             },
-            () => !string.IsNullOrWhiteSpace(this.Title) && !string.IsNullOrWhiteSpace(this.Url));
+            () =>
+            {
+                if (string.IsNullOrWhiteSpace(this.Title) || string.IsNullOrWhiteSpace(this.Url))
+                {
+                    return false;
+                }
+
+                var dummy = default(Uri);
+                return Uri.TryCreate(this.Url, UriKind.Absolute, out dummy);
+            });
 
             this.CancelCommand = new RelayCommand(() =>
             {
+                this.Application.CancelAddFavorite();
                 this.Messenger.SendWithViewModelToken(
                     this,
                     new NavigationMessage(NavigationBehavior.Back));

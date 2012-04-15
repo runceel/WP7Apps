@@ -24,6 +24,19 @@ namespace Okazuki.SearchHub.ViewModels
     {
         public RelayCommand AddFavoriteCommand { get; private set; }
 
+        private int _CurrentCategoryIndex;
+        public int CurrentCategoryIndex
+        {
+            get
+            {
+                return _CurrentCategoryIndex;
+            }
+            set
+            {
+                this.SetProperty<int>(() => CurrentCategoryIndex, ref _CurrentCategoryIndex, value);
+            }
+        }
+
         private ObservableCollection<CategoryViewModel> _Categories = new ObservableCollection<CategoryViewModel>();
         public ObservableCollection<CategoryViewModel> Categories
         {
@@ -35,16 +48,7 @@ namespace Okazuki.SearchHub.ViewModels
             set
             {
                 this.SetProperty<ObservableCollection<CategoryViewModel>>(() => Categories, ref _Categories, value);
-                this.categoriesViewSource.Source = value;
-                this.RaisePropertyChanged(() => CategoriesView);
             }
-        }
-
-        private CollectionViewSource categoriesViewSource;
-
-        public ICollectionView CategoriesView
-        {
-            get { return this.categoriesViewSource.View; }
         }
 
         public MainPageViewModel()
@@ -54,16 +58,15 @@ namespace Okazuki.SearchHub.ViewModels
                 return;
             }
 
-            this.categoriesViewSource = new CollectionViewSource { Source = this.Categories };
             this.BuildChilren();
 
             this.AddFavoriteCommand = new RelayCommand(() =>
             {
-                var currentCategory = this.CategoriesView.CurrentItem as CategoryViewModel;
-                this.Application.CurrentCategory = currentCategory.Model;
+                var currentCategory = this.Categories[this.CurrentCategoryIndex];
+                this.Application.StartAddFavorite(currentCategory.Model);
                 this.Messenger.SendWithViewModelToken(
                     this,
-                    new NavigationMessage("/Views/FavAddPageViewModel.xaml"));
+                    new NavigationMessage("/Views/FavAddPage.xaml"));
             });
         }
 

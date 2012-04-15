@@ -36,15 +36,9 @@
         		<RowDefinition Height="Auto"/>
         		<RowDefinition Height="Auto"/>
         	</Grid.RowDefinitions>
-            <TextBlock TextWrapping="Wrap" Height="134" VerticalAlignment="Top" Grid.Row="0">
-            	<Run Text="お気に入りのページをカテゴリごとに分類しておけるアプリケーションです。"/>
-				<LineBreak/>
-				<Run/>
-				<LineBreak/>
-				<Run Text="ブラウザのお気に入りを開くのが手間なので作成しました。"/>
-			</TextBlock>
+            <TextBlock TextWrapping="Wrap" Grid.Row="0"><Run Text="お気に入りのページをカテゴリごとに分類しておけるアプリケーションです。"/><Run Text=" "/><LineBreak/><Run/><LineBreak/><Run Text="タイルを長押しすることで、タイルの移動や削除・編集が行えます。"/><LineBreak/><Run Text=" "/><Run/><Run Text=" "/><LineBreak/><Run Text=" "/><Run Text="ブラウザのお気に入りを開くのが手間なので作成しました。"/></TextBlock>
             <TextBlock TextWrapping="Wrap" Text="試用版（機能制限無し）" Grid.Row="1" Visibility="{Binding Path=IsTrial, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <Button Content="アプリケーションページ" Grid.Row="2"/>
+            <Button Content="アプリケーションページ" Grid.Row="2" Click="Button_Click" />
         </Grid>
     </Grid>
  

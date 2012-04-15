@@ -15,7 +15,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
     toolkit:TiltEffect.IsTiltEnabled="True">
 	<phone:PhoneApplicationPage.ApplicationBar>
@@ -24,7 +24,9 @@
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 	<i:Interaction.Behaviors>
-		<Okazuki_MVVM_Behaviors:DialogMessageBehavior MessageToken="{Binding MessageToken, Mode=OneWay}"/>
+        <Okazuki_MVVM_Behaviors:DialogMessageBehavior MessageToken="{Binding MessageToken, Mode=OneWay}"/>
+        <Okazuki_MVVM_Behaviors:NavigationMessageBehavior MessageToken="{Binding MessageToken, Mode=OneWay}"/>
+        <Okazuki_MVVM_Behaviors:ApplicationBarButtonCommand ButtonText="追加" CommandBinding="{Binding Path=AddCategoryCommand}" />
 	</i:Interaction.Behaviors>
     <phone:PhoneApplicationPage.DataContext>
         <vm:CategoryListViewModel />
@@ -80,6 +82,13 @@
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </toolkit:MenuItem>
+                                    <toolkit:MenuItem Header="編集">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Tap">
+                                                <i:InvokeCommandAction Command="{Binding EditCommand}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </toolkit:MenuItem>
                                     <toolkit:MenuItem Header="削除">
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="Tap">
@@ -91,7 +100,7 @@
                             </toolkit:ContextMenuService.ContextMenu>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Tap">
-                                    <i:InvokeCommandAction Command="{Binding OpenBroserCommand}" />
+                                    <i:InvokeCommandAction Command="{Binding GoToCategoryCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <Rectangle 

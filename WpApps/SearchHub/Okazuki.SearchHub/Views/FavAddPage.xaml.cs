@@ -13,9 +13,9 @@ using Microsoft.Phone.Controls;
 
 namespace Okazuki.SearchHub.Views
 {
-    public partial class FavAddPageViewModel : PhoneApplicationPage
+    public partial class FavAddPage : PhoneApplicationPage
     {
-        public FavAddPageViewModel()
+        public FavAddPage()
         {
             InitializeComponent();
         }

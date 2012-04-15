@@ -44,7 +44,7 @@
     <!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--ピボット コントロール-->
-        <controls:Pivot Title="{Binding ApplicationName}" ItemsSource="{Binding CategoriesView}">
+        <controls:Pivot Name="pivotCategories" Title="{Binding ApplicationName}" ItemsSource="{Binding Categories}" SelectionChanged="Pivot_SelectionChanged">
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Model.Name}" />
@@ -52,10 +52,10 @@
             </controls:Pivot.HeaderTemplate>
             <controls:Pivot.ItemTemplate>
                 <DataTemplate>
-                    <ListBox ItemsSource="{Binding Favorites}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox ItemsSource="{Binding Favorites}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VirtualizingStackPanel.VirtualizationMode="Standard">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <toolkit:WrapPanel>
+                                <VirtualizingStackPanel>
 			                    	<i:Interaction.Behaviors>
 			                    		<el:FluidMoveBehavior AppliesTo="Children">
 			                    			<el:FluidMoveBehavior.EaseY>
@@ -66,12 +66,17 @@
 			                    			</el:FluidMoveBehavior.EaseX>
 			                    		</el:FluidMoveBehavior>
 			                    	</i:Interaction.Behaviors>
-                                </toolkit:WrapPanel>
+                                </VirtualizingStackPanel>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="185" Height="185" Margin="12,12,0,0" d:DataContext="{d:DesignInstance Type=vm:FavViewModel}">
+                                <Grid Margin="5" d:DataContext="{d:DesignInstance Type=vm:FavViewModel}" HorizontalAlignment="Stretch">
                                     <toolkit:ContextMenuService.ContextMenu>
                                         <toolkit:ContextMenu>
                                             <toolkit:MenuItem Header="上へ">
@@ -85,6 +90,13 @@
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="Tap">
                                                         <i:InvokeCommandAction Command="{Binding DownCommand}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </toolkit:MenuItem>
+                                            <toolkit:MenuItem Header="編集">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Tap">
+                                                        <i:InvokeCommandAction Command="{Binding EditCommand}" />
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                             </toolkit:MenuItem>
@@ -102,17 +114,10 @@
                                 			<i:InvokeCommandAction Command="{Binding OpenBroserCommand}" />
                                 		</i:EventTrigger>
                                 	</i:Interaction.Triggers>
-                                    <Rectangle 
-                                        HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Stretch" 
-                                        Fill="{StaticResource PhoneAccentBrush}" />
-                                    <TextBlock
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Bottom"
-                                        Margin="10,0,0,10"
-                                        Foreground="White"
-                                        Text="{Binding Model.Title}" 
-                                        TextWrapping="Wrap" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Rectangle Width="50" Height="50" Fill="{StaticResource PhoneAccentBrush}" Margin="5,5,25,5"/>
+                                        <TextBlock Text="{Binding Model.Title}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Foreground="{StaticResource PhoneForegroundBrush}" Margin="5" FontSize="{StaticResource PhoneFontSizeLarge}" />
+                                    </StackPanel>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

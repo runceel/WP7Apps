@@ -86,6 +86,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\EditCategoryModel.cs" />
+    <Compile Include="Models\EditFavoriteModel.cs" />
     <Compile Include="Models\FavItem.cs" />
     <Compile Include="Models\ListExtensions.cs" />
     <Compile Include="Models\SearchHubApplication.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="ViewModels\CategoryListCategoryViewModel.cs" />
     <Compile Include="ViewModels\CategoryListViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Constraits.cs" />
     <Compile Include="ViewModels\FavAddPageViewModel.cs" />
     <Compile Include="ViewModels\FavViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
@@ -102,11 +105,14 @@
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CategoryEditPage.xaml.cs">
+      <DependentUpon>CategoryEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoryListView.xaml.cs">
       <DependentUpon>CategoryListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FavAddPageViewModel.xaml.cs">
-      <DependentUpon>FavAddPageViewModel.xaml</DependentUpon>
+    <Compile Include="Views\FavAddPage.xaml.cs">
+      <DependentUpon>FavAddPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -133,6 +139,9 @@
     <Content Include="icons\appbar.add.rest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\appbar.cancel.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
@@ -150,11 +159,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CategoryEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CategoryListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FavAddPageViewModel.xaml">
+    <Page Include="Views\FavAddPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

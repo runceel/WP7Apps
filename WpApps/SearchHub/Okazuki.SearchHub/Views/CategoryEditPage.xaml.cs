@@ -10,22 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Tasks;
 
 namespace Okazuki.SearchHub.Views
 {
-    public partial class AboutPage : PhoneApplicationPage
+    public partial class CategoryEditPage : PhoneApplicationPage
     {
-        public AboutPage()
+        public CategoryEditPage()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var task = new MarketplaceDetailTask();
-            task.ContentIdentifier = "243654a1-283e-490c-ab6c-468f71439120";
-            task.Show();
         }
     }
 }
