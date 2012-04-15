@@ -27,11 +27,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
 			<shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="カテゴリ一覧表示" Click="ApplicationBarMenuItemShowCategoryList_Click"/>
                 <shell:ApplicationBarMenuItem Text="アバウト" Click="ApplicationBarMenuItemAbout_Click"/>
             </shell:ApplicationBar.MenuItems>
-			<shell:ApplicationBarIconButton IconUri="/icons/appbar.add.rest.png" Text="追加"/>
-		</shell:ApplicationBar>
+                <shell:ApplicationBarIconButton IconUri="/icons/appbar.add.rest.png" Text="追加"/>
+                <shell:ApplicationBarIconButton IconUri="/icons/appbar.folder.rest.png" Text="リスト" Click="ApplicationBarMenuItemShowCategoryList_Click"/>
+        </shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 
     <i:Interaction.Behaviors>

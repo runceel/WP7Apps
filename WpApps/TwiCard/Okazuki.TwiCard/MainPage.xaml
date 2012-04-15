@@ -6,15 +6,18 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
-    Language="ja-JP">
+    Language="ja-JP" xmlns:my="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI" d:DesignHeight="696" d:DesignWidth="480">
 	<phone:PhoneApplicationPage.ApplicationBar>
 		<shell:ApplicationBar>
+			<shell:ApplicationBar.MenuItems>
+				<shell:ApplicationBarMenuItem Text="アバウト" Click="ApplicationBarMenuItem_Click"/>
+			</shell:ApplicationBar.MenuItems>
 			<shell:ApplicationBarIconButton IconUri="/icons/appbar.download.rest.png" Text="作成" Click="ApplicationBarIconButtonCreate_Click"/>
 			<shell:ApplicationBarIconButton IconUri="/icons/appbar.save.rest.png" Text="保存" Click="ApplicationBarIconButtonSave_Click"/>
 		</shell:ApplicationBar>
@@ -27,6 +30,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <ProgressBar Name="progressBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" IsIndeterminate="True" Visibility="Collapsed" />
+        
         <!--TitlePanel は、アプリケーション名とページ タイトルを格納します-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="Twitter名刺ジェネレータ" Style="{StaticResource PhoneTextNormalStyle}"/>
@@ -41,29 +46,29 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="385*" />
+                <RowDefinition Height="360*" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
             <TextBlock Name="textBlock1" Text="Twitter ID：" VerticalAlignment="Center" HorizontalAlignment="Right" />
             <TextBox Name="textBoxTwitterId" Text="" Grid.Column="1" />
-            <Border BorderThickness="1" BorderBrush="Black" Padding="2" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Margin="42,25,0,0" Name="grid1" VerticalAlignment="Top" >
+            <Border BorderThickness="1" BorderBrush="Black" Padding="2" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Margin="42,25,0,0" VerticalAlignment="Top" >
                 <Grid Background="White" Name="gridCard" Width="400" Height="200" >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="216*" />
-                        <ColumnDefinition Width="178*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="100*" />
                     </Grid.RowDefinitions>
-                    <Image Name="imageProfile" Stretch="UniformToFill" Grid.RowSpan="4" Margin="5" VerticalAlignment="Center" />
-                    <TextBlock Name="textBlockTwitterId" Text="" Foreground="Black" FontSize="11" Grid.Column="1" Margin="1,2.5,2.5,1" />
-                    <TextBlock Name="textBlockScreenName" Text="" Foreground="Black" FontSize="11" Grid.Row="1" Grid.Column="1" Margin="1,1,2.5,1" />
-                    <TextBlock Name="textBlockDescription" Text="" Foreground="Black" TextWrapping="Wrap" FontSize="11" Grid.Row="3" Grid.Column="1" Margin="1,1,2.5,1" />
-                    <TextBlock Name="textBlockLocation" Text="" Foreground="Black" FontSize="11" Grid.Row="2" Grid.Column="1" Margin="1,1,2.5,2.5" />
+                    <Image Name="imageProfile" Stretch="Uniform" Grid.RowSpan="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="130" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Name="textBlockTwitterId" Text="" Foreground="Black" FontSize="11" Margin="1,2.5,2.5,1" />
+                        <TextBlock Name="textBlockScreenName" Text="" Foreground="Black" FontSize="11" Margin="1,1,2.5,1" />
+                        <TextBlock Name="textBlockLocation" Text="" Foreground="Black" FontSize="11" Margin="1,1,2.5,2.5" />
+                    </StackPanel>
                 </Grid>
             </Border>
+            <my:AdControl AdUnitId="85671" ApplicationId="700c7c59-6cff-49f3-a5bb-3879fc0b6b21" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch" Name="adControl2" VerticalAlignment="Stretch" />
         </Grid>
+        
     </Grid>
  </phone:PhoneApplicationPage>

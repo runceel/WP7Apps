@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using TweetSharp;
-using System.Windows.Media.Imaging;
-using System.IO.IsolatedStorage;
-using System.IO;
-using Microsoft.Xna.Framework.Media;
-
-namespace Okazuki.TwiCard
+﻿namespace Okazuki.TwiCard
 {
+    using System;
+    using System.IO;
+    using System.IO.IsolatedStorage;
+    using System.Windows;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using Microsoft.Phone.Controls;
+    using Microsoft.Xna.Framework.Media;
+    using TweetSharp;
+
     public partial class MainPage : PhoneApplicationPage
     {
         // コンストラクター
@@ -34,6 +26,7 @@ namespace Okazuki.TwiCard
                 return;
             }
 
+            this.progressBar.Visibility = Visibility.Visible;
             var s = new TwitterService();
             s.GetUserProfileFor(textBoxTwitterId.Text, (user, resp) =>
             {
@@ -42,6 +35,7 @@ namespace Okazuki.TwiCard
                     this.Dispatcher.BeginInvoke(() =>
                     {
                         MessageBox.Show("データの取得に失敗しました");
+                        this.progressBar.Visibility = Visibility.Collapsed;
                     });
                     return;
                 }
@@ -55,7 +49,7 @@ namespace Okazuki.TwiCard
                     this.textBlockTwitterId.Text = "id:" + user.ScreenName;
                     this.textBlockScreenName.Text = "name: " + user.Name;
                     this.textBlockLocation.Text = "location: " + user.Location;
-                    this.textBlockDescription.Text = user.Description;
+                    this.progressBar.Visibility = Visibility.Collapsed;
                 });
             });
         }
@@ -77,6 +71,11 @@ namespace Okazuki.TwiCard
             }
 
             MessageBox.Show(string.Format("名刺を{0}という名前で保存しました", fileName));
+        }
+
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
         }
     }
 }
