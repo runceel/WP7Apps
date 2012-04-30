@@ -9,6 +9,7 @@
     using Microsoft.Phone.Controls;
     using Microsoft.Xna.Framework.Media;
     using TweetSharp;
+    using System.Windows.Input;
 
     public partial class MainPage : PhoneApplicationPage
     {
@@ -27,6 +28,7 @@
             }
 
             this.progressBar.Visibility = Visibility.Visible;
+            this.Focus();
             var s = new TwitterService();
             s.GetUserProfileFor(textBoxTwitterId.Text, (user, resp) =>
             {

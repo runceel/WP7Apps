@@ -23,7 +23,7 @@ namespace Okazuki.SearchHub.Models
             }
         }
 
-        private string _Name = "お気に入り帳";
+        private string _Name = "ぶくさち";
         public string Name
         {
             get

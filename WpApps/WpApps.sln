@@ -43,6 +43,35 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TwiCard", "TwiCard\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TwiCard.Test", "TwiCard\Okazuki.TwiCard.Test\Okazuki.TwiCard.Test.csproj", "{78D03539-445B-43ED-B5EF-174B61F3175E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{F3F9DC64-6286-41EB-AC2C-10AA6AC34CF6}"
+	ProjectSection(SolutionItems) = preProject
+		SearchHub\Images\ApplicationIcon.png = SearchHub\Images\ApplicationIcon.png
+		SearchHub\Images\Background.png = SearchHub\Images\Background.png
+		SearchHub\Images\screenshot1.png = SearchHub\Images\screenshot1.png
+		SearchHub\Images\screenshot2.png = SearchHub\Images\screenshot2.png
+		SearchHub\Images\SplashScreenImage.jpg = SearchHub\Images\SplashScreenImage.jpg
+		SearchHub\Images\ぶくさち172.png = SearchHub\Images\ぶくさち172.png
+		SearchHub\Images\ぶくさち173.png = SearchHub\Images\ぶくさち173.png
+		SearchHub\Images\ぶくさち200.png = SearchHub\Images\ぶくさち200.png
+		SearchHub\Images\ぶくさち62.png = SearchHub\Images\ぶくさち62.png
+		SearchHub\Images\ぶくさち99.png = SearchHub\Images\ぶくさち99.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{97A38332-8729-4930-8C59-2AFB0BD66BEB}"
+	ProjectSection(SolutionItems) = preProject
+		TwiCard\Images\ApplicationIcon.png = TwiCard\Images\ApplicationIcon.png
+		TwiCard\Images\Background.png = TwiCard\Images\Background.png
+		TwiCard\Images\market-twicard173.png = TwiCard\Images\market-twicard173.png
+		TwiCard\Images\market-twicard200.png = TwiCard\Images\market-twicard200.png
+		TwiCard\Images\market-twicard99.png = TwiCard\Images\market-twicard99.png
+		TwiCard\Images\twicard-ss1.png = TwiCard\Images\twicard-ss1.png
+		TwiCard\Images\twicard-ss2.png = TwiCard\Images\twicard-ss2.png
+		TwiCard\Images\twicard-ss3.png = TwiCard\Images\twicard-ss3.png
+		TwiCard\Images\twicard172.png = TwiCard\Images\twicard172.png
+		TwiCard\Images\twicard173.png = TwiCard\Images\twicard173.png
+		TwiCard\Images\twicard62.png = TwiCard\Images\twicard62.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,7 +134,9 @@ Global
 		{0D50D9E5-C0B8-4FC7-AE29-B63EA07FB7BB} = {5FBC07EF-A0FD-4DB5-A699-247A1415065F}
 		{C0B74F79-5D90-464C-A576-C65018510C99} = {3699149D-7F32-450D-90F5-BFAB0D717160}
 		{A8A922D6-AED4-4156-90E8-0EC59315FE3F} = {3699149D-7F32-450D-90F5-BFAB0D717160}
+		{F3F9DC64-6286-41EB-AC2C-10AA6AC34CF6} = {3699149D-7F32-450D-90F5-BFAB0D717160}
 		{02FB60FF-379E-4C43-8934-1523533130EA} = {CE153616-6FBB-46DD-B652-E96DB51F82B3}
 		{78D03539-445B-43ED-B5EF-174B61F3175E} = {CE153616-6FBB-46DD-B652-E96DB51F82B3}
+		{97A38332-8729-4930-8C59-2AFB0BD66BEB} = {CE153616-6FBB-46DD-B652-E96DB51F82B3}
 	EndGlobalSection
 EndGlobal

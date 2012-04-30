@@ -11,6 +11,7 @@
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
 	Orientation="Portrait"
+    Loaded="PhoneApplicationPage_Loaded"
 	shell:SystemTray.IsVisible="True" Language="ja-JP">
 
 	<!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
@@ -28,7 +29,15 @@
 
 		<!--ContentPanel - 追加のコンテンツを配置します-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<TextBlock TextWrapping="Wrap" Text="Twitter IDをもとにTwitterの名刺画像を作成するアプリケーションです。"/>
-		</Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock TextWrapping="Wrap" Text="Twitter IDをもとにTwitterの名刺画像を作成するアプリケーションです。" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <StackPanel Grid.Row="1">
+                <TextBlock TextWrapping="Wrap" Text="試用版（機能制限無し）" Name="textBlockTrial" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <Button Content="アプリケーションページ" Click="ShowMarketButton_Click" />
+            </StackPanel>
+        </Grid>
 	</Grid>
 </phone:PhoneApplicationPage>
