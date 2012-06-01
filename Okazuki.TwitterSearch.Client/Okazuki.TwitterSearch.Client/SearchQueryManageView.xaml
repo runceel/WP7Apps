@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Okazuki.TwitterSearch.Client.SearchQueryManageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="clr-namespace:Okazuki.TwitterSearch.ViewModel;assembly=Okazuki.TwitterSearch.ViewModel"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    Language="ja-jp"
+    d:DataContext="{d:DesignInstance Type=vm:MainPageViewModel}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <Grid x:Name="LayoutRoot">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding Queries}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding Path=EditTargetQuery.Value, Mode=TwoWay}" FontSize="{StaticResource PhoneFontSizeMedium}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,5,10">
+                            <TextBlock Text="{Binding Title.Value}" />
+                            <TextBlock Text="：" />
+                            <TextBlock Text="{Binding Model.Value.Query}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Column="1">
+                <Button Content="〆" Command="{Binding EditCommand}" />
+                <Button Content="▲" Command="{Binding UpCommand}" />
+                <Button Content="▼" Command="{Binding DownCommand}" />
+                <Button Content="×" Command="{Binding RemoveCommand}" Margin="0,20,0,0" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

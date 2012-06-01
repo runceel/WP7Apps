@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TwitterSearch.Client", "Okazuki.TwitterSearch.Client\Okazuki.TwitterSearch.Client.csproj", "{706F7962-AEB5-4ECE-88D2-A55622DD786B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TwitterSearch.Model", "Okazuki.TwitterSearch.Model\Okazuki.TwitterSearch.Model.csproj", "{EA80AFCD-997A-4678-8B55-76938C46258E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TwitterSearch.Test", "Okazuki.TwitterSearch.Test\Okazuki.TwitterSearch.Test.csproj", "{12BA0EAB-29D4-4420-83B0-93790FBF1114}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Okazuki.TwitterSearch.ViewModel", "Okazuki.TwitterSearch.ViewModel\Okazuki.TwitterSearch.ViewModel.csproj", "{8BB3537D-482D-44E3-BDD3-D381C607EFF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{706F7962-AEB5-4ECE-88D2-A55622DD786B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706F7962-AEB5-4ECE-88D2-A55622DD786B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706F7962-AEB5-4ECE-88D2-A55622DD786B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{706F7962-AEB5-4ECE-88D2-A55622DD786B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706F7962-AEB5-4ECE-88D2-A55622DD786B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706F7962-AEB5-4ECE-88D2-A55622DD786B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EA80AFCD-997A-4678-8B55-76938C46258E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA80AFCD-997A-4678-8B55-76938C46258E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA80AFCD-997A-4678-8B55-76938C46258E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA80AFCD-997A-4678-8B55-76938C46258E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12BA0EAB-29D4-4420-83B0-93790FBF1114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12BA0EAB-29D4-4420-83B0-93790FBF1114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12BA0EAB-29D4-4420-83B0-93790FBF1114}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{12BA0EAB-29D4-4420-83B0-93790FBF1114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12BA0EAB-29D4-4420-83B0-93790FBF1114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12BA0EAB-29D4-4420-83B0-93790FBF1114}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8BB3537D-482D-44E3-BDD3-D381C607EFF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB3537D-482D-44E3-BDD3-D381C607EFF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB3537D-482D-44E3-BDD3-D381C607EFF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB3537D-482D-44E3-BDD3-D381C607EFF2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

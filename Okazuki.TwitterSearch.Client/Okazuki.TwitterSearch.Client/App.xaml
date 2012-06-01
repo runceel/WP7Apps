@@ -1,0 +1,22 @@
+﻿<Application 
+    x:Class="Okazuki.TwitterSearch.Client.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Okazuki.TwitterSearch.ViewModel;assembly=Okazuki.TwitterSearch.ViewModel"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:my="clr-namespace:Okazuki.TwitterSearch.Client">
+
+    <!--アプリケーション リソース-->
+    <Application.Resources>
+        <vm:ViewModelLocator x:Key="locator" />
+    <my:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+  </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--アプリケーションのライフタイム イベントを処理する必須オブジェクト-->
+        <shell:PhoneApplicationService 
+            Launching="Application_Launching" Closing="Application_Closing" 
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

@@ -1,0 +1,75 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Okazuki.TwitterSearch.ViewModel;assembly=Okazuki.TwitterSearch.ViewModel"
+    xmlns:v="clr-namespace:Okazuki.TwitterSearch.Client"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:Microsoft_Practices_Prism_Interactivity_InteractionRequest="clr-namespace:Microsoft.Practices.Prism.Interactivity.InteractionRequest;assembly=Microsoft.Practices.Prism.Interactivity" 
+    xmlns:Microsoft_Practices_Prism_Interactivity="clr-namespace:Microsoft.Practices.Prism.Interactivity;assembly=Microsoft.Practices.Prism.Interactivity"
+    xmlns:Okazuki_TwitterSearch_ViewModel_Interactivity="clr-namespace:Okazuki.TwitterSearch.ViewModel.Interactivity;assembly=Okazuki.TwitterSearch.ViewModel" 
+    x:Class="Okazuki.TwitterSearch.Client.SearchViewPage"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    Language="ja-JP"
+    d:DataContext="{d:DesignInstance Type=vm:SearchViewViewModel}"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True" DataContext="{Binding Source={StaticResource locator}, Path=Main.MainPage.Value.SelectedQuery.Value}">
+	<phone:PhoneApplicationPage.ApplicationBar>
+		<shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.refresh.rest.png" Text="再検索"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.ocazuco.toast.png" Text="つぶやく"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.share.rest.png" Text="共有"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.favs.rest.png" Text="非公式 RT"/>
+        </shell:ApplicationBar>
+	</phone:PhoneApplicationPage.ApplicationBar>
+    
+    <i:Interaction.Behaviors>
+        <Microsoft_Practices_Prism_Interactivity:ApplicationBarButtonCommand ButtonText="共有" CommandBinding="{Binding Path=ShareTweetCommand}" />
+        <Microsoft_Practices_Prism_Interactivity:ApplicationBarButtonCommand ButtonText="再検索" CommandBinding="{Binding Path=QueryCommand}" />
+        <Microsoft_Practices_Prism_Interactivity:ApplicationBarButtonCommand ButtonText="非公式 RT" CommandBinding="{Binding Path=RetweetCommand}" />
+        <Microsoft_Practices_Prism_Interactivity:ApplicationBarButtonCommand ButtonText="つぶやく" CommandBinding="{Binding Path=TweetCommand}" />
+    </i:Interaction.Behaviors>
+
+    <i:Interaction.Triggers>
+        <Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger SourceObject="{Binding Path=NavigateRequest}">
+			<Okazuki_TwitterSearch_ViewModel_Interactivity:NavigateAction/>
+        </Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger>
+        <Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger SourceObject="{Binding Path=ShareTweetRequest}">
+            <Okazuki_TwitterSearch_ViewModel_Interactivity:ShareLinkAction />
+        </Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger>
+        <Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger SourceObject="{Binding Path=TweetRequest}">
+            <Okazuki_TwitterSearch_ViewModel_Interactivity:ShareAction />
+        </Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+        	<RowDefinition Height="Auto"/>
+        	<RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel は、アプリケーション名とページ タイトルを格納します-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Main.Title.Value, Source={StaticResource locator}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding PageName.Value}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - 追加コンテンツをここに入力します-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <v:TwetterSearchResultView />
+            <Border Opacity="0.7" Background="{StaticResource PhoneBackgroundBrush}" Visibility="{Binding Path=IsBusy.Value, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <ProgressBar Visibility="Visible" IsIndeterminate="True" />
+                    <TextBlock Text="検索中" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

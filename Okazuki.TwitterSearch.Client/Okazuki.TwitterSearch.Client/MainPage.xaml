@@ -1,0 +1,73 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:prismVm="clr-namespace:Microsoft.Practices.Prism.ViewModel;assembly=Microsoft.Practices.Prism"
+    xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:vm="clr-namespace:Okazuki.TwitterSearch.ViewModel;assembly=Okazuki.TwitterSearch.ViewModel"
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:Okazuki_TwitterSearch_ViewModel_Interactivity="clr-namespace:Okazuki.TwitterSearch.ViewModel.Interactivity;assembly=Okazuki.TwitterSearch.ViewModel" 
+    xmlns:Microsoft_Practices_Prism_Interactivity="clr-namespace:Microsoft.Practices.Prism.Interactivity;assembly=Microsoft.Practices.Prism.Interactivity" 
+    xmlns:v="clr-namespace:Okazuki.TwitterSearch.Client"
+    x:Class="Okazuki.TwitterSearch.Client.MainPage"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DataContext="{d:DesignInstance Type=vm:MainPageViewModel}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    Language="ja-JP"
+    toolkit:TiltEffect.IsTiltEnabled="True" DataContext="{Binding Main.MainPage.Value, Source={StaticResource locator}}">
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.add.rest.png" Text="追加"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.ocazuco.toast.png" Text="つぶやく"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <i:Interaction.Triggers>
+        <Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger SourceObject="{Binding NavigateRequest}">
+            <Okazuki_TwitterSearch_ViewModel_Interactivity:NavigateAction/>
+        </Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger>
+        <Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger SourceObject="{Binding Path=TweetRequest}">
+            <Okazuki_TwitterSearch_ViewModel_Interactivity:ShareAction />
+        </Okazuki_TwitterSearch_ViewModel_Interactivity:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <i:Interaction.Behaviors>
+        <Microsoft_Practices_Prism_Interactivity:ApplicationBarButtonCommand ButtonText="追加" CommandBinding="{Binding Path=AddCommand}" />
+        <Microsoft_Practices_Prism_Interactivity:ApplicationBarButtonCommand ButtonText="つぶやく" CommandBinding="{Binding Path=TweetCommand}" />
+        <Okazuki_TwitterSearch_ViewModel_Interactivity:PageLifecycleBehavior />
+    </i:Interaction.Behaviors>
+
+    <!--LayoutRoot は、すべてのページ コンテンツが配置されるルート グリッドです-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--TitlePanel は、アプリケーション名とページ タイトルを格納します-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,0">
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding PageName.Value}"/>
+        </StackPanel>
+        <controls:Pivot Grid.Row="1">
+            <controls:PivotItem Header="検索">
+                <v:SearchQueryTileView Margin="12,0,12,0" />
+            </controls:PivotItem>
+            <controls:PivotItem Header="管理">
+                <v:SearchQueryManageView Margin="12,0,12,0" />
+            </controls:PivotItem>
+            <controls:PivotItem Header="About">
+                <v:AboutView Margin="12,0,12,0" />
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>

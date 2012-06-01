@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio 10.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="10.0">
+ <Targets>
+  <Target Name="C:\Users\Kazuki\Documents\Visual Studio 2010\Libraries\Prism\PrismLibrary\Phone\Prism.Interactivity\Bin\Release\Microsoft.Practices.Prism.Interactivity.dll">
+   <Modules>
+    <Module Name="microsoft.practices.prism.interactivity.dll">
+     <Namespaces>
+      <Namespace Name="Microsoft.Practices.Prism.Interactivity.InteractionRequest">
+       <Types>
+        <Type Name="ToastPopupAction" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001" Status="Active" Created="2011-09-20 12:26:32Z" FixCategory="DependsOnFix">
+           <Issue Name="DependsOnFix" Certainty="95" Level="CriticalError">次の IDisposable 型のメンバーを作成するため、IDisposable を 'ToastPopupAction' で実装します: 'Timer'。'ToastPopupAction' が以前に出荷されている場合、IDisposable を実装する新しいメンバーを追加することは、既存のコンシューマーにとって重大な変更になります。</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="TypesThatOwnDisposableFieldsShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1001">
+   <Name>破棄可能なフィールドを所有する型は、破棄可能でなければなりません</Name>
+   <Description>破棄可能なメンバーを宣言する型は、IDisposable を実装しなければなりません。型がアンマネージ リソースを所有しない場合は、その型でファイナライザーを実装しないでください。</Description>
+   <Resolution Name="DependsOnFix">次の IDisposable 型のメンバーを作成するため、IDisposable を {0} で実装します: {1}。{0} が以前に出荷されている場合、IDisposable を実装する新しいメンバーを追加することは、既存のコンシューマーにとって重大な変更になります。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182172(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="10.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">カテゴリ</String>
+  <String Key="Certainty">確実性</String>
+  <String Key="CollapseAll">すべて折りたたみ</String>
+  <String Key="CheckId">ID の確認</String>
+  <String Key="Error">エラー</String>
+  <String Key="Errors">エラー</String>
+  <String Key="ExpandAll">すべて展開</String>
+  <String Key="Help">ヘルプ</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">メッセージ</String>
+  <String Key="LocationNotStoredInPdb">[場所は Pdb に格納されていません]</String>
+  <String Key="Project">プロジェクト</String>
+  <String Key="Resolution">解像度</String>
+  <String Key="Rule">ルール</String>
+  <String Key="RuleFile">規則ファイル</String>
+  <String Key="RuleDescription">規則の説明</String>
+  <String Key="Source">ソース</String>
+  <String Key="Status">状態</String>
+  <String Key="Target">ターゲット</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">コード分析レポート</String>
+ </Localized>
+</FxCopReport>

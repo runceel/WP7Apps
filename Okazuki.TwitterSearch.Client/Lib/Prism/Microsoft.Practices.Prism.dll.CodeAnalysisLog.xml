@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio 10.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="10.0">
+ <Targets>
+  <Target Name="C:\Users\Kazuki\Documents\Visual Studio 2010\Libraries\Prism\PrismLibrary\Phone\Prism\Bin\Release\Microsoft.Practices.Prism.dll">
+   <Modules>
+    <Module Name="microsoft.practices.prism.dll">
+     <Namespaces>
+      <Namespace Name="Microsoft.Practices.Prism.Events">
+       <Types>
+        <Type Name="WeakDelegatesManager" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#AddListener(System.Delegate)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2011-09-20 12:26:37Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\Kazuki\Documents\Visual Studio 2010\Libraries\Prism\PrismLibrary\Desktop\Prism\Events" File="WeakDelegatesManager.cs" Line="29">'WeakDelegatesManager.AddListener(Delegate)' は、アップストリームのパブリックな、または保護された呼び出し側を含んでいません。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Raise(System.Object[])" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2011-09-20 12:26:37Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\Kazuki\Documents\Visual Studio 2010\Libraries\Prism\PrismLibrary\Desktop\Prism\Events" File="WeakDelegatesManager.cs" Line="44">'WeakDelegatesManager.Raise(params object[])' は、アップストリームのパブリックな、または保護された呼び出し側を含んでいません。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#RemoveListener(System.Delegate)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2011-09-20 12:26:37Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="C:\Users\Kazuki\Documents\Visual Studio 2010\Libraries\Prism\PrismLibrary\Desktop\Prism\Events" File="WeakDelegatesManager.cs" Line="34">'WeakDelegatesManager.RemoveListener(Delegate)' は、アップストリームのパブリックな、または保護された呼び出し側を含んでいません。</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+   <Name>呼び出されていないプライベート コードを使用しません</Name>
+   <Description>外部から参照可能ではない、不明なランタイム エントリ ポイントである、呼び出されていないコードがあります。この違反がエラーを発生させる場合、Visual Studio コード分析チームに問題報告を送信してください。</Description>
+   <Resolution Name="Default">{0} は、アップストリームのパブリックな、または保護された呼び出し側を含んでいません。</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182264(VS.100).aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="10.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">カテゴリ</String>
+  <String Key="Certainty">確実性</String>
+  <String Key="CollapseAll">すべて折りたたみ</String>
+  <String Key="CheckId">ID の確認</String>
+  <String Key="Error">エラー</String>
+  <String Key="Errors">エラー</String>
+  <String Key="ExpandAll">すべて展開</String>
+  <String Key="Help">ヘルプ</String>
+  <String Key="Line">行</String>
+  <String Key="Messages">メッセージ</String>
+  <String Key="LocationNotStoredInPdb">[場所は Pdb に格納されていません]</String>
+  <String Key="Project">プロジェクト</String>
+  <String Key="Resolution">解像度</String>
+  <String Key="Rule">ルール</String>
+  <String Key="RuleFile">規則ファイル</String>
+  <String Key="RuleDescription">規則の説明</String>
+  <String Key="Source">ソース</String>
+  <String Key="Status">状態</String>
+  <String Key="Target">ターゲット</String>
+  <String Key="Warning">警告</String>
+  <String Key="Warnings">警告</String>
+  <String Key="ReportTitle">コード分析レポート</String>
+ </Localized>
+</FxCopReport>
